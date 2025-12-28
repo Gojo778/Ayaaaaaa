@@ -1,0 +1,1028 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>For AYA</title>
+  <style>
+    :root{
+      --bg:#ffd7e5;
+      --bg2:#ffe9f1;
+      --card:#ffffffcc;
+      --ink:#3b1b2b;
+      --muted:#6a3a52;
+      --accent:#c84b78;
+      --shadow: 0 18px 45px rgba(0,0,0,.15);
+      --radius: 22px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      color:var(--ink);
+      background:
+        radial-gradient(900px 700px at 15% 25%, #ff6fa340, transparent 55%),
+        radial-gradient(700px 600px at 85% 30%, #ffb6cf55, transparent 60%),
+        linear-gradient(135deg, var(--bg), var(--bg2));
+      display:grid;
+      place-items:center;
+      padding:18px;
+    }
+    .app{ width:min(860px, 100%); display:grid; gap:14px; }
+    .card{
+      background: var(--card);
+      border: 1px solid #ffffff;
+      box-shadow: var(--shadow);
+      border-radius: var(--radius);
+      padding:18px;
+      position:relative;
+      overflow:hidden;
+    }
+    .hidden{display:none !important;}
+    .paper{
+      background:
+        radial-gradient(1px 1px at 20% 25%, #00000010 50%, transparent 51%),
+        radial-gradient(1px 1px at 70% 65%, #00000010 50%, transparent 51%),
+        radial-gradient(1px 1px at 40% 80%, #00000010 50%, transparent 51%),
+        linear-gradient(180deg, #ffffffd8, #ffffffc8);
+    }
+
+    /* Intro */
+    .opening{
+      display:grid;
+      gap:12px;
+      justify-items:center;
+      text-align:center;
+      padding:22px 16px;
+    }
+    .kitty{
+      width:170px;height:170px;
+      position:relative;
+      filter: drop-shadow(0 18px 22px rgba(0,0,0,.12));
+    }
+    .kitty .head{
+      position:absolute; inset:30px 22px 18px 22px;
+      background:#fff;
+      border-radius: 40px;
+      border: 3px solid #2a1a22;
+    }
+    .kitty .ear{
+      position:absolute; top:20px;
+      width:52px;height:52px;
+      background:#fff;
+      border:3px solid #2a1a22;
+      border-bottom:none;
+      border-radius: 16px 16px 0 0;
+    }
+    .kitty .ear.left{left:26px; transform: rotate(-14deg);}
+    .kitty .ear.right{right:26px; transform: rotate(10deg);}
+    .kitty .eye{
+      position:absolute; top:92px;
+      width:18px;height:18px; border-radius:50%;
+      background:#2a1a22;
+    }
+    .kitty .eye.left{left:62px}
+    .kitty .eye.right{right:62px}
+    .kitty .mouth{
+      position:absolute; top:112px; left:50%;
+      width:28px;height:18px;
+      transform:translateX(-50%);
+      border-bottom:3px solid #2a1a22;
+      border-radius:0 0 18px 18px;
+    }
+    .kitty .blush{
+      position:absolute; top:112px;
+      width:34px;height:18px;
+      background:#ff8fb3;
+      opacity:.55;
+      border-radius:999px;
+    }
+    .kitty .blush.left{left:38px}
+    .kitty .blush.right{right:38px}
+    .kitty .hearts{
+      position:absolute; inset:0;
+      display:grid; place-items:center;
+      font-size:22px;
+      opacity:.9;
+    }
+
+    .bigTitle{
+      margin:0;
+      font-weight:1000;
+      letter-spacing:.02em;
+      color:var(--accent);
+      font-size: clamp(28px, 5vw, 52px);
+      text-transform: uppercase;
+    }
+    .smallText{
+      margin:0;
+      color:var(--muted);
+      font-weight:800;
+      font-size:13px;
+      letter-spacing:.06em;
+      text-transform: uppercase;
+    }
+    .choiceRow{display:flex; gap:14px; justify-content:center; margin-top:8px;}
+    .circleBtn{
+      width:62px;height:62px;
+      border-radius:999px;
+      border:0; cursor:pointer;
+      display:grid; place-items:center;
+      font-size:26px; font-weight:1000;
+      box-shadow: 0 14px 26px rgba(0,0,0,.12);
+      background: #c84b78; color:#fff;
+    }
+    .circleBtn:active{transform:translateY(1px)}
+    .hint{margin-top:10px; font-size:13px; color:var(--muted); font-weight:800;}
+
+    /* UI */
+    .topbar{
+      display:flex; flex-wrap:wrap;
+      align-items:center; justify-content:space-between;
+      gap:10px; margin-bottom:10px;
+    }
+    .tag{
+      font-size:13px;
+      color:var(--muted);
+      background:#ffffffb8;
+      border:1px solid #ffffff;
+      padding:8px 10px;
+      border-radius:999px;
+      text-align:center;
+      font-weight:900;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding:12px 16px;
+      border-radius:14px;
+      border:0;
+      cursor:pointer;
+      font-weight:900;
+      background: linear-gradient(135deg, #ff6fa3, #ffb6cf);
+      color:#3b1124;
+      box-shadow: 0 14px 26px rgba(255,111,163,.25);
+    }
+    .btn.secondary{
+      background:#ffffffcc;
+      border:1px solid #ffffff;
+      box-shadow:none;
+      color:var(--ink);
+    }
+
+    .grid2{
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap:10px;
+    }
+    @media(max-width:860px){ .grid2{grid-template-columns:1fr;} }
+    .gameCard{
+      border:1px solid #ffffff;
+      background:#ffffffa8;
+      border-radius:18px;
+      padding:14px;
+      display:grid;
+      gap:10px;
+      box-shadow: 0 10px 20px rgba(0,0,0,.06);
+    }
+    .gameCard h3{ margin:0; font-size:18px; letter-spacing:-.01em; }
+    .gameCard p{
+      margin:0;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.6;
+      font-weight:800;
+    }
+
+    canvas{
+      width:100%;
+      max-width:520px;
+      border-radius:18px;
+      border: 2px solid #ffffff;
+      background: #ffffff;
+      display:block;
+      margin: 0 auto;
+      box-shadow: var(--shadow);
+      touch-action: none;
+    }
+    .ctrlRow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:center;
+      margin-top:10px;
+    }
+
+    /* Modal + letter + typing */
+    .modal{
+      position:fixed; inset:0;
+      display:none; place-items:center;
+      padding:18px;
+      background: rgba(0,0,0,.35);
+      z-index:9999;
+    }
+    .modal.show{display:grid}
+    .modalCard{
+      width:min(860px, 100%);
+      border-radius: 22px;
+      background: linear-gradient(180deg, #fff, #fff7fb);
+      border: 1px solid #ffffff;
+      box-shadow: 0 22px 60px rgba(0,0,0,.18);
+      padding:18px;
+      position:relative;
+      overflow:hidden;
+    }
+    .modalHeader{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:10px; margin-bottom:10px;
+    }
+    .modalHeader .close{
+      border:1px solid #ffffff;
+      background:#ffffff;
+      border-radius:14px;
+      padding:10px 12px;
+      font-weight:1000;
+      cursor:pointer;
+      color:#2f1530;
+    }
+    .msg{
+      margin:0;
+      font-size: clamp(18px, 2.3vw, 24px);
+      line-height:1.55;
+      color:var(--ink);
+      font-weight:1000;
+    }
+    .msg2{
+      margin:10px 0 0;
+      font-size:15.5px;
+      line-height:1.7;
+      color:var(--muted);
+      font-weight:800;
+      white-space:pre-wrap;
+    }
+    .letter{
+      margin-top:12px;
+      padding:16px 16px 18px;
+      border-radius:18px;
+      border:2px solid #ffe2ed;
+      background:
+        radial-gradient(10px 10px at 12% 22%, #ffb6cf35 35%, transparent 36%),
+        radial-gradient(10px 10px at 78% 28%, #ffb6cf2e 35%, transparent 36%),
+        radial-gradient(10px 10px at 34% 78%, #ffb6cf2e 35%, transparent 36%),
+        linear-gradient(180deg, #ffffff, #fff7fb);
+      box-shadow: 0 10px 22px rgba(0,0,0,.08);
+      white-space:pre-wrap;
+      line-height:1.75;
+      color:#5a2d43;
+      font-weight:800;
+      position:relative;
+      overflow:hidden;
+      min-height: 190px;
+      transform-origin: center;
+      animation: letterPop .35s ease-out;
+    }
+    @keyframes letterPop{ from{transform:scale(.985);opacity:.6} to{transform:scale(1);opacity:1} }
+    .letter::before{
+      content:"💗  💌  🐾  💗";
+      position:absolute;
+      top:10px; right:14px;
+      font-size:14px; opacity:.95;
+      animation: floatBadge 1.8s ease-in-out infinite;
+    }
+    @keyframes floatBadge{ 0%,100%{transform:translateY(0)} 50%{transform:translateY(-3px)} }
+    .typingHint{
+      margin-top:10px;
+      display:none;
+      color: var(--muted);
+      font-weight:900;
+      font-size:13px;
+    }
+    .typingHint.show{display:block;}
+    .modalActions{
+      display:flex; gap:10px; flex-wrap:wrap;
+      margin-top:14px; justify-content:flex-end;
+    }
+
+    /* Celebration */
+    .celebrate{
+      position:fixed; inset:0;
+      pointer-events:none;
+      z-index:10000;
+      overflow:hidden;
+    }
+    .celebrate span{
+      position:absolute;
+      font-size: clamp(18px, 3.8vw, 34px);
+      filter: drop-shadow(0 10px 16px rgba(0,0,0,.18));
+      opacity:0;
+      animation: floatUp 1.8s ease-in forwards;
+    }
+    @keyframes floatUp{
+      0%{transform:translateY(30px) scale(.9); opacity:0}
+      12%{opacity:1}
+      70%{opacity:1}
+      100%{transform:translateY(-220px) scale(1.06); opacity:0}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+
+    <!-- INTRO -->
+    <section class="card paper" id="screenIntro">
+      <div class="opening">
+        <div class="kitty" aria-hidden="true">
+          <div class="hearts">💗 &nbsp; 🌸 &nbsp; 💗</div>
+          <div class="ear left"></div>
+          <div class="ear right"></div>
+          <div class="head"></div>
+          <div class="eye left"></div>
+          <div class="eye right"></div>
+          <div class="blush left"></div>
+          <div class="blush right"></div>
+          <div class="mouth"></div>
+        </div>
+
+        <h1 class="bigTitle">YOU WANNA PLAY BABY!</h1>
+        <p class="smallText">Pick a cute game 💗</p>
+
+        <div class="choiceRow">
+          <button class="circleBtn" id="btnNo" type="button">✖</button>
+          <button class="circleBtn" id="btnYes" type="button">✓</button>
+        </div>
+
+        <div class="hint" id="noHint"></div>
+      </div>
+    </section>
+
+    <!-- HUB -->
+    <section class="card hidden" id="screenHub">
+      <div class="topbar">
+        <div class="tag">Two games for AYA 💗</div>
+        <button class="btn secondary" id="btnHomeFromHub">Home</button>
+      </div>
+
+      <div class="grid2">
+        <div class="gameCard">
+          <h3>1) Maze</h3>
+          <p>Find the flowers 🌸 inside the maze.</p>
+          <button class="btn" id="goMaze">Play Maze</button>
+        </div>
+
+        <div class="gameCard">
+          <h3>2) Mission (Collect + Avoid)</h3>
+          <p>Collect 3 flowers 🌸 + the key 🔑, avoid enemies 😾, then reach 🐱.</p>
+          <button class="btn" id="goMission">Play Mission</button>
+        </div>
+      </div>
+
+      <div style="margin-top:12px; display:grid; gap:8px;">
+        <div class="tag">Tip: Use arrows on screen or keyboard.</div>
+      </div>
+    </section>
+
+    <!-- GAME 1: MAZE -->
+    <section class="card hidden" id="screenMaze">
+      <div class="topbar">
+        <div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center;">
+          <div class="tag">Maze for AYA</div>
+          <div class="tag">Find the flowers 🌸</div>
+        </div>
+        <div class="ctrlRow" style="margin-top:0;">
+          <button class="btn secondary" id="btnBackFromMaze">Back</button>
+          <button class="btn secondary" id="btnMazeRestart">Restart</button>
+        </div>
+      </div>
+
+      <canvas id="mazeCanvas" width="520" height="520"></canvas>
+
+      <div class="ctrlRow"><button class="btn" id="mazeUp" type="button">⬆</button></div>
+      <div class="ctrlRow">
+        <button class="btn" id="mazeLeft" type="button">⬅</button>
+        <button class="btn" id="mazeDown" type="button">⬇</button>
+        <button class="btn" id="mazeRight" type="button">➡</button>
+      </div>
+
+      <div class="tag" style="margin-top:10px;">You can also use arrow keys.</div>
+    </section>
+
+    <!-- GAME 2: MISSION -->
+    <section class="card hidden" id="screenMission">
+      <div class="topbar">
+        <div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center;">
+          <div class="tag">Mission for AYA</div>
+          <div class="tag">🌸 <span id="mFlowers">0</span>/3</div>
+          <div class="tag">🔑 <span id="mKey">no</span></div>
+          <div class="tag">Goal: 🐱</div>
+        </div>
+        <div class="ctrlRow" style="margin-top:0;">
+          <button class="btn secondary" id="btnBackFromMission">Back</button>
+          <button class="btn secondary" id="btnMissionRestart">Restart</button>
+        </div>
+      </div>
+
+      <canvas id="missionCanvas" width="520" height="520"></canvas>
+
+      <div class="ctrlRow"><button class="btn" id="misUp" type="button">⬆</button></div>
+      <div class="ctrlRow">
+        <button class="btn" id="misLeft" type="button">⬅</button>
+        <button class="btn" id="misDown" type="button">⬇</button>
+        <button class="btn" id="misRight" type="button">➡</button>
+      </div>
+
+      <div class="tag" style="margin-top:10px;">Collect 🌸🌸🌸 + 🔑, avoid 😾, then reach 🐱</div>
+    </section>
+
+  </div>
+
+  <!-- MODAL -->
+  <div class="modal" id="modal">
+    <div class="modalCard">
+      <div class="modalHeader">
+        <div class="tag" id="modalTitle">Message</div>
+        <button class="close" id="modalClose">Close</button>
+      </div>
+
+      <p class="msg" id="modalMsg1"></p>
+      <p class="msg2" id="modalMsg2"></p>
+
+      <div class="letter" id="letterBox" style="display:none;"></div>
+      <div class="typingHint" id="typingHint">Typing… (tap Next to skip)</div>
+
+      <div class="modalActions">
+        <button class="btn secondary" id="modalHome">Home</button>
+        <button class="btn" id="modalNext">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // =========================
+    // NAV
+    // =========================
+    const HER_NAME = "AYA";
+
+    const screens = {
+      intro: document.getElementById("screenIntro"),
+      hub: document.getElementById("screenHub"),
+      maze: document.getElementById("screenMaze"),
+      mission: document.getElementById("screenMission"),
+    };
+
+    function show(name){
+      Object.values(screens).forEach(s => s.classList.add("hidden"));
+      screens[name].classList.remove("hidden");
+    }
+
+    document.getElementById("btnYes").addEventListener("click", () => {
+      show("hub");
+      document.getElementById("noHint").textContent = "";
+    });
+
+    document.getElementById("btnNo").addEventListener("click", () => {
+      document.getElementById("noHint").textContent = "No is not allowed. Tap ✓";
+    });
+
+    document.getElementById("btnHomeFromHub").addEventListener("click", () => {
+      stopMissionLoop();
+      show("intro");
+    });
+
+    // Hub buttons
+    document.getElementById("goMaze").addEventListener("click", () => {
+      stopMissionLoop();
+      show("maze");
+      mazeInit();
+    });
+    document.getElementById("goMission").addEventListener("click", () => {
+      show("mission");
+      missionInit();
+    });
+
+    document.getElementById("btnBackFromMaze").addEventListener("click", () => show("hub"));
+    document.getElementById("btnBackFromMission").addEventListener("click", () => { stopMissionLoop(); show("hub"); });
+
+    // =========================
+    // MODAL + TYPING
+    // =========================
+    const modal = document.getElementById("modal");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalMsg1 = document.getElementById("modalMsg1");
+    const modalMsg2 = document.getElementById("modalMsg2");
+    const modalClose = document.getElementById("modalClose");
+    const modalHome = document.getElementById("modalHome");
+    const modalNext = document.getElementById("modalNext");
+    const letterBox = document.getElementById("letterBox");
+    const typingHint = document.getElementById("typingHint");
+
+    let modalNextAction = null;
+
+    let typingTimer = null;
+    let typingDone = true;
+    let typingFullText = "";
+
+    function stopTyping(){
+      if(typingTimer) clearInterval(typingTimer);
+      typingTimer = null;
+      typingDone = true;
+      typingHint.classList.remove("show");
+    }
+
+    function typeInto(el, text, speed=14){
+      stopTyping();
+      typingDone = false;
+      typingFullText = text;
+      el.textContent = "";
+      typingHint.classList.add("show");
+
+      let i = 0;
+      typingTimer = setInterval(() => {
+        i++;
+        el.textContent = text.slice(0, i);
+        if(i >= text.length){
+          clearInterval(typingTimer);
+          typingTimer = null;
+          typingDone = true;
+          typingHint.classList.remove("show");
+        }
+      }, speed);
+    }
+
+    function openModal(title, m1, m2, nextLabel="Next", nextAction=null, letterText=null){
+      stopTyping();
+      modalTitle.textContent = title;
+      modalMsg1.textContent = m1;
+      modalMsg2.textContent = m2;
+
+      if(letterText){
+        letterBox.style.display = "block";
+        typeInto(letterBox, letterText, 14);
+      } else {
+        letterBox.style.display = "none";
+        letterBox.textContent = "";
+        typingHint.classList.remove("show");
+      }
+
+      modalNext.textContent = nextLabel;
+      modalNextAction = nextAction;
+      modal.classList.add("show");
+    }
+
+    function closeModal(){
+      stopTyping();
+      modal.classList.remove("show");
+    }
+
+    modalClose.addEventListener("click", closeModal);
+    modalHome.addEventListener("click", () => {
+      stopMissionLoop();
+      closeModal();
+      show("intro");
+    });
+    modal.addEventListener("click", (e) => { if(e.target === modal) closeModal(); });
+
+    modalNext.addEventListener("click", () => {
+      if(letterBox.style.display === "block" && !typingDone){
+        stopTyping();
+        letterBox.textContent = typingFullText;
+        return;
+      }
+      closeModal();
+      if(typeof modalNextAction === "function") modalNextAction();
+    });
+
+    function celebrate(){
+      const wrap = document.createElement("div");
+      wrap.className = "celebrate";
+      const items = ["🐱","🌸","🐾","💗","🌸","🐱","💌","🌸","🐾","💗"];
+      for(let i=0;i<26;i++){
+        const s = document.createElement("span");
+        s.textContent = items[Math.floor(Math.random()*items.length)];
+        s.style.left = Math.random()*100 + "%";
+        s.style.top = (70 + Math.random()*25) + "%";
+        s.style.animationDelay = (Math.random()*0.35) + "s";
+        s.style.animationDuration = (1.4 + Math.random()*0.9) + "s";
+        wrap.appendChild(s);
+      }
+      document.body.appendChild(wrap);
+      setTimeout(()=> wrap.remove(), 2400);
+    }
+
+    const apologyLetter =
+`(=^･ω･^=) ♡
+
+🌸 Aya 🌸
+
+I’m sorry for everything.
+I know I messed up in ways that hurt you, and I hate that I made you feel anything less than loved and safe.
+
+All I need is my baby to come back.
+Please stop acting cold with me.
+
+I love you so much, Aya,
+and I want you with me.
+
+💗`;
+
+    function winSequence(backTo="hub"){
+      celebrate();
+      openModal(
+        "Yaaay 💗",
+        `I love youuu ${HER_NAME}!! Good job, my pretty girl 🌸`,
+        "Come read something I wrote just for you 💌",
+        "Read my letter",
+        () => {
+          openModal(
+            "From me to you 💌",
+            "Please read this, Aya.",
+            "Tap Next if you want it faster.",
+            "Back",
+            () => show(backTo),
+            apologyLetter
+          );
+        }
+      );
+    }
+
+    // =========================
+    // GAME 1: MAZE (simple)
+    // =========================
+    const mazeCanvas = document.getElementById("mazeCanvas");
+    const mctx = mazeCanvas.getContext("2d");
+
+    const MAZE = [
+      "1111111111111",
+      "1000001000001",
+      "1011101011101",
+      "1010000010001",
+      "1010111110101",
+      "1000100010101",
+      "1110101010101",
+      "1000101010001",
+      "1011101011111",
+      "1010000000001",
+      "1010111111101",
+      "1000000000001",
+      "1111111111111",
+    ];
+    const MROWS = MAZE.length, MCOLS = MAZE[0].length;
+    const MTILE = Math.floor(mazeCanvas.width / MCOLS);
+    const MOFFY = Math.floor((mazeCanvas.height - (MROWS * MTILE)) / 2);
+
+    let mazePlayer = { x: 1, y: 1 };
+    const mazeGoal = { x: 11, y: 11 };
+    let mazeWon = false;
+
+    function drawMaze(){
+      mctx.clearRect(0,0,mazeCanvas.width,mazeCanvas.height);
+      mctx.fillStyle = "#ffffff";
+      mctx.fillRect(0,0,mazeCanvas.width,mazeCanvas.height);
+
+      for(let y=0;y<MROWS;y++){
+        for(let x=0;x<MCOLS;x++){
+          const isWall = (MAZE[y][x] === "1");
+          mctx.fillStyle = isWall ? "#7cc9e8" : "#fff";
+          mctx.fillRect(x*MTILE, MOFFY + y*MTILE, MTILE, MTILE);
+        }
+      }
+
+      mctx.font = `${Math.floor(MTILE*0.75)}px system-ui, Apple Color Emoji`;
+      mctx.textAlign="center";
+      mctx.textBaseline="middle";
+      mctx.fillText("🌸", mazeGoal.x*MTILE + MTILE/2, MOFFY + mazeGoal.y*MTILE + MTILE/2);
+
+      mctx.font = `${Math.floor(MTILE*0.72)}px system-ui, Apple Color Emoji`;
+      mctx.fillText("👧", mazePlayer.x*MTILE + MTILE/2, MOFFY + mazePlayer.y*MTILE + MTILE/2);
+
+      mctx.strokeStyle="rgba(0,0,0,.08)";
+      mctx.lineWidth=2;
+      mctx.strokeRect(1,1,mazeCanvas.width-2,mazeCanvas.height-2);
+    }
+
+    function mazeCanMove(x,y){
+      if(x<0 || y<0 || x>=MCOLS || y>=MROWS) return false;
+      return MAZE[y][x] === "0";
+    }
+
+    function mazeMove(dx,dy){
+      if(mazeWon) return;
+      const nx = mazePlayer.x + dx;
+      const ny = mazePlayer.y + dy;
+      if(mazeCanMove(nx,ny)){
+        mazePlayer.x = nx; mazePlayer.y = ny;
+        drawMaze();
+        if(mazePlayer.x === mazeGoal.x && mazePlayer.y === mazeGoal.y){
+          mazeWon = true;
+          winSequence("hub");
+        }
+      }
+    }
+
+    function mazeInit(){
+      mazeWon = false;
+      mazePlayer = {x:1,y:1};
+      drawMaze();
+    }
+
+    document.getElementById("btnMazeRestart").addEventListener("click", mazeInit);
+    document.getElementById("mazeUp").addEventListener("click", () => mazeMove(0,-1));
+    document.getElementById("mazeDown").addEventListener("click", () => mazeMove(0,1));
+    document.getElementById("mazeLeft").addEventListener("click", () => mazeMove(-1,0));
+    document.getElementById("mazeRight").addEventListener("click", () => mazeMove(1,0));
+
+    // =========================
+    // GAME 2: MISSION (Collect items + avoid enemies)
+    // =========================
+    const missionCanvas = document.getElementById("missionCanvas");
+    const qctx = missionCanvas.getContext("2d");
+    const flowersEl = document.getElementById("mFlowers");
+    const keyEl = document.getElementById("mKey");
+
+    const QSIZE = 13;
+    const QTILE = Math.floor(missionCanvas.width / QSIZE);
+
+    // 1=wall, 0=path
+    const QUEST = [
+      "1111111111111",
+      "1000000000001",
+      "1011110111111",
+      "1000010000001",
+      "1111011111101",
+      "1000000000101",
+      "1011111110101",
+      "1010000010001",
+      "1010111011111",
+      "1000100000001",
+      "1110111111101",
+      "1000000000001",
+      "1111111111111",
+    ];
+
+    let qPlayer = {x:1,y:11};
+    let qGoal   = {x:11,y:1};         // cat
+    let qDoor   = {x:11,y:2};         // door tile (needs key)
+    let qFlowers = [];
+    let qKey = {x:2,y:2, taken:false};
+    let qCount = 0;
+    let hasKey = false;
+    let qWon = false;
+
+    // Enemies move automatically
+    let enemies = [];
+    let enemyTimer = null;
+
+    function qIsWall(x,y){
+      if(x<0||y<0||x>=QSIZE||y>=QSIZE) return true;
+      return QUEST[y][x] === "1";
+    }
+
+    function qIsBlockedByDoor(x,y){
+      // door blocks until you have key
+      if(x === qDoor.x && y === qDoor.y && !hasKey) return true;
+      return false;
+    }
+
+    function qPlaceItems(){
+      // fixed positions for reliable gameplay
+      qFlowers = [
+        {x:3,y:9, taken:false},
+        {x:9,y:5, taken:false},
+        {x:10,y:10, taken:false},
+        {x:6,y:1, taken:false},
+        {x:1,y:6, taken:false},
+      ];
+      qKey = {x:2,y:2, taken:false};
+      qCount = 0;
+      hasKey = false;
+      flowersEl.textContent = qCount;
+      keyEl.textContent = "no";
+    }
+
+    function qPlaceEnemies(){
+      // Each enemy has a simple "patrol" direction; they bounce on walls/door
+      enemies = [
+        {x:5,y:11, dx:1, dy:0},
+        {x:9,y:7,  dx:0, dy:1},
+        {x:3,y:4,  dx:1, dy:0},
+      ];
+    }
+
+    function drawMission(){
+      qctx.clearRect(0,0,missionCanvas.width, missionCanvas.height);
+
+      // night-ish bg
+      qctx.fillStyle = "#7a76b8";
+      qctx.fillRect(0,0,missionCanvas.width, missionCanvas.height);
+
+      // stars
+      qctx.fillStyle = "rgba(255,255,255,.85)";
+      for(let i=0;i<70;i++){
+        const x = (i*37)%missionCanvas.width;
+        const y = (i*71)%missionCanvas.height;
+        qctx.fillRect(x, y, 2, 2);
+      }
+
+      // grid blocks
+      for(let y=0;y<QSIZE;y++){
+        for(let x=0;x<QSIZE;x++){
+          if(qIsWall(x,y)){
+            qctx.fillStyle = "rgba(255,255,255,.18)";
+            qctx.fillRect(x*QTILE, y*QTILE, QTILE, QTILE);
+          } else {
+            qctx.fillStyle = "rgba(0,0,0,.06)";
+            qctx.fillRect(x*QTILE, y*QTILE, QTILE, QTILE);
+          }
+        }
+      }
+
+      // Door
+      qctx.font = `${Math.floor(QTILE*0.75)}px system-ui, Apple Color Emoji`;
+      qctx.textAlign="center";
+      qctx.textBaseline="middle";
+      qctx.fillText(hasKey ? "🚪" : "🔒", qDoor.x*QTILE+QTILE/2, qDoor.y*QTILE+QTILE/2);
+
+      // Key
+      if(!qKey.taken){
+        qctx.fillText("🔑", qKey.x*QTILE+QTILE/2, qKey.y*QTILE+QTILE/2);
+      }
+
+      // Flowers
+      qFlowers.forEach(f=>{
+        if(!f.taken){
+          qctx.fillText("🌸", f.x*QTILE+QTILE/2, f.y*QTILE+QTILE/2);
+        }
+      });
+
+      // Goal cat (locked until conditions)
+      qctx.font = `${Math.floor(QTILE*0.78)}px system-ui, Apple Color Emoji`;
+      qctx.fillText("🐱", qGoal.x*QTILE+QTILE/2, qGoal.y*QTILE+QTILE/2);
+      if(!(qCount>=3 && hasKey)){
+        qctx.font = `${Math.floor(QTILE*0.6)}px system-ui, Apple Color Emoji`;
+        qctx.fillText("🔒", qGoal.x*QTILE+QTILE/2, qGoal.y*QTILE+QTILE/2 + QTILE*0.62);
+      }
+
+      // Enemies
+      qctx.font = `${Math.floor(QTILE*0.75)}px system-ui, Apple Color Emoji`;
+      enemies.forEach(en=>{
+        qctx.fillText("😾", en.x*QTILE+QTILE/2, en.y*QTILE+QTILE/2);
+      });
+
+      // Player
+      qctx.font = `${Math.floor(QTILE*0.78)}px system-ui, Apple Color Emoji`;
+      qctx.fillText("👧", qPlayer.x*QTILE+QTILE/2, qPlayer.y*QTILE+QTILE/2);
+
+      // border
+      qctx.strokeStyle="rgba(255,255,255,.25)";
+      qctx.lineWidth=3;
+      qctx.strokeRect(2,2,missionCanvas.width-4, missionCanvas.height-4);
+    }
+
+    function qCheckCollision(){
+      const hit = enemies.some(en => en.x===qPlayer.x && en.y===qPlayer.y);
+      if(hit){
+        qGameOver();
+        return true;
+      }
+      return false;
+    }
+
+    function qTryCollect(){
+      // flowers
+      qFlowers.forEach(f=>{
+        if(!f.taken && f.x===qPlayer.x && f.y===qPlayer.y){
+          f.taken = true;
+          qCount++;
+          flowersEl.textContent = qCount;
+        }
+      });
+
+      // key
+      if(!qKey.taken && qKey.x===qPlayer.x && qKey.y===qPlayer.y){
+        qKey.taken = true;
+        hasKey = true;
+        keyEl.textContent = "yes";
+      }
+    }
+
+    function missionMove(dx,dy){
+      if(qWon) return;
+
+      const nx = qPlayer.x + dx;
+      const ny = qPlayer.y + dy;
+
+      if(!qIsWall(nx,ny) && !qIsBlockedByDoor(nx,ny)){
+        qPlayer.x = nx; qPlayer.y = ny;
+
+        qTryCollect();
+        drawMission();
+
+        if(qCheckCollision()) return;
+
+        // win only if 3 flowers + key + reach cat
+        if(qCount >= 3 && hasKey && qPlayer.x===qGoal.x && qPlayer.y===qGoal.y){
+          qWon = true;
+          stopMissionLoop();
+          winSequence("hub");
+        }
+      }
+    }
+
+    function enemyStep(){
+      if(qWon) return;
+
+      enemies.forEach(en=>{
+        const nx = en.x + en.dx;
+        const ny = en.y + en.dy;
+
+        // bounce if wall/door/edge
+        if(qIsWall(nx,ny) || qIsBlockedByDoor(nx,ny)){
+          // swap direction: if moving horizontally -> reverse, else reverse vertical
+          en.dx = -en.dx;
+          en.dy = -en.dy;
+          return;
+        }
+
+        en.x = nx; en.y = ny;
+      });
+
+      drawMission();
+      qCheckCollision();
+    }
+
+    function startMissionLoop(){
+      stopMissionLoop();
+      enemyTimer = setInterval(enemyStep, 260);
+    }
+
+    function stopMissionLoop(){
+      if(enemyTimer){
+        clearInterval(enemyTimer);
+        enemyTimer = null;
+      }
+    }
+
+    function qGameOver(){
+      stopMissionLoop();
+      openModal(
+        "Oops 😿",
+        "The enemy caught you!",
+        "Try again baby — you got this 💗",
+        "Restart",
+        () => {
+          show("mission");
+          missionInit();
+        }
+      );
+    }
+
+    function missionInit(){
+      qWon = false;
+      qPlayer = {x:1,y:11};
+      qGoal   = {x:11,y:1};
+      qDoor   = {x:11,y:2};
+
+      qPlaceItems();
+      qPlaceEnemies();
+
+      drawMission();
+      startMissionLoop();
+    }
+
+    document.getElementById("btnMissionRestart").addEventListener("click", missionInit);
+    document.getElementById("misUp").addEventListener("click", () => missionMove(0,-1));
+    document.getElementById("misDown").addEventListener("click", () => missionMove(0,1));
+    document.getElementById("misLeft").addEventListener("click", () => missionMove(-1,0));
+    document.getElementById("misRight").addEventListener("click", () => missionMove(1,0));
+
+    // =========================
+    // KEYBOARD (context-aware)
+    // =========================
+    window.addEventListener("keydown",(e)=>{
+      if(e.key !== "ArrowUp" && e.key !== "ArrowDown" && e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+
+      if(!screens.maze.classList.contains("hidden")){
+        if(e.key==="ArrowUp") mazeMove(0,-1);
+        if(e.key==="ArrowDown") mazeMove(0,1);
+        if(e.key==="ArrowLeft") mazeMove(-1,0);
+        if(e.key==="ArrowRight") mazeMove(1,0);
+      } else if(!screens.mission.classList.contains("hidden")){
+        if(e.key==="ArrowUp") missionMove(0,-1);
+        if(e.key==="ArrowDown") missionMove(0,1);
+        if(e.key==="ArrowLeft") missionMove(-1,0);
+        if(e.key==="ArrowRight") missionMove(1,0);
+      }
+    });
+
+    // Back buttons: stop enemy loop when leaving mission
+    document.getElementById("btnBackFromMaze").addEventListener("click", () => show("hub"));
+    document.getElementById("btnBackFromMission").addEventListener("click", () => { stopMissionLoop(); show("hub"); });
+
+    // Intro start
+    show("intro");
+  </script>
+</body>
+</html>
